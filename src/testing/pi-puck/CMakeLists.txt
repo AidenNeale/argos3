@@ -1,3 +1,4 @@
 add_subdirectory(drive_forward_dynamics3d)
 add_subdirectory(drive_forward_dynamics2d)
 add_subdirectory(front_camera_tags_leds)
+add_subdirectory(moving_ground_sensor)
