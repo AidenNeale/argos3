@@ -8,6 +8,7 @@
 
 #include <argos3/core/control_interface/ci_controller.h>
 #include <argos3/plugins/robots/pi-puck/control_interface/ci_pipuck_differential_drive_actuator.h>
+#include <argos3/plugins/robots/pi-puck/control_interface/ci_pipuck_ground_sensor.h>
 
 using namespace argos;
 
@@ -29,6 +30,7 @@ using namespace argos;
   private:
     /* Pointer to the differential drive actuator */
     CCI_PiPuckDifferentialDriveActuator* pcActuator;
+    CCI_PiPuckGroundSensor* pcGround;
   };
 
 
