@@ -4,19 +4,28 @@
  */
 
 #include "controller.h"
-
+#include <argos3/core/utility/logging/argos_log.h>
 CTestController::CTestController() :
-  pcActuator(NULL) {}
+  pcActuator(NULL),
+  pcGround(NULL) {}
 
   /****************************************/
   /****************************************/
 
   void CTestController::Init(TConfigurationNode& t_tree) {
     pcActuator = GetActuator<CCI_PiPuckDifferentialDriveActuator>("pipuck_differential_drive");
+    pcGround = GetSensor<CCI_PiPuckGroundSensor>("pipuck_ground");
   }
 
   void CTestController::ControlStep() {
     pcActuator->SetLinearVelocity(0.1, 0.1); // 10 centimeter per second forwards
+    std::vector<Real> vecReadings;
+    pcGround->Visit([&vecReadings] (const CCI_PiPuckGroundSensor::SInterface& s_interface) {
+      vecReadings.emplace_back(s_interface.Reflected);
+    });
+    for(Real f_reading : vecReadings) {
+      std::cout << "Reading: " << f_reading << std::endl;
+    }
   }
 
   /****************************************/
