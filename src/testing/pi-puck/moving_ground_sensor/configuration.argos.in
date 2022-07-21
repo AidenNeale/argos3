@@ -36,9 +36,9 @@
   <!-- *********************** -->
   <arena size="2, 1, 1" positional_index="grid" positional_grid_size="25,25,1">
     <floor id="floor" source="image" pixels_per_meter="1000"
-          path="src/testing/pi-puck/moving_ground_sensor/floors/pipuck_pathfollowing.png" />
+          path="src/testing/pi-puck/moving_ground_sensor/floors/Multi-Coloured.png" />
     <pipuck id="pipuck">
-      <body position="-0.5,0,0" orientation="0,0,0"/>
+      <body position="-1.0,0,0" orientation="0,0,0"/>
       <controller config="test_controller"/>
     </pipuck>
   </arena>
