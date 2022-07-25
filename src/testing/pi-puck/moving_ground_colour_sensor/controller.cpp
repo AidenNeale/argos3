@@ -14,18 +14,20 @@ CTestController::CTestController() :
 
   void CTestController::Init(TConfigurationNode& t_tree) {
     pcActuator = GetActuator<CCI_PiPuckDifferentialDriveActuator>("pipuck_differential_drive");
-    pcGround = GetSensor<CCI_PiPuckGroundSensor>("pipuck_ground");
+    LOG << "[IMPORTANT] Reached Sensor Initialisation" << std::endl;
+    LOG.Flush();
+    pcGround = GetSensor<CCI_PiPuckGroundColourSensor>("pipuck_ground_colour");
   }
 
   void CTestController::ControlStep() {
-    pcActuator->SetLinearVelocity(0.1, 0.1); // 10 centimeter per second forwards
-    std::vector<Real> vecReadings;
-    pcGround->Visit([&vecReadings] (const CCI_PiPuckGroundSensor::SInterface& s_interface) {
-      vecReadings.emplace_back(s_interface.Reflected);
-    });
-    for(Real f_reading : vecReadings) {
-      std::cout << "Reading: " << f_reading << std::endl;
-    }
+    // pcActuator->SetLinearVelocity(0.1, 0.1); // 10 centimeter per second forwards
+    // std::vector<Real> vecReadings;
+    // pcGround->Visit([&vecReadings] (const CCI_PiPuckGroundColourSensor::SInterface& s_interface) {
+    //   vecReadings.emplace_back(s_interface.Reflected);
+    // });
+    // for(Real f_reading : vecReadings) {
+    //   std::cout << "Reading: " << f_reading << std::endl;
+    // }
   }
 
   /****************************************/
