@@ -19,7 +19,7 @@
         <pipuck_differential_drive implementation="default" />
       </actuators>
       <sensors>
-        <pipuck_ground implementation="default" />
+        <pipuck_ground_colour implementation="default" />
       </sensors>
       <params />
     </test_controller>
