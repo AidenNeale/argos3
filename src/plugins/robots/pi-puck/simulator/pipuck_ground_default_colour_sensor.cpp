@@ -73,13 +73,11 @@ namespace argos {
         }
         if(bIntersection) {
           /* get the color */
-          const CColor& cColor =
+          s_interface.cColor =
               m_cFloorEntity.GetColorAtPoint(cIntersection.GetX(), cIntersection.GetY());
-          /* set reading */
-          s_interface.Reflected = cColor.ToGrayScale() / 255.0;
         }
         else {
-          s_interface.Reflected = 1.0;
+          s_interface.cColor.Set("white");
         }
     }
   }
@@ -89,8 +87,7 @@ namespace argos {
 
   void CPiPuckGroundDefaultColourSensor::Reset() {
     for(SSimulatedInterface& s_interface : m_vecSimulatedInterfaces) {
-        s_interface.Reflected = 0.0;
-        s_interface.Background = 0.0;
+      s_interface.cColor.Set("white");
     }
   }
 
