@@ -14,8 +14,6 @@ CTestController::CTestController() :
 
   void CTestController::Init(TConfigurationNode& t_tree) {
     pcActuator = GetActuator<CCI_PiPuckDifferentialDriveActuator>("pipuck_differential_drive");
-    LOG << "[IMPORTANT] Reached Sensor Initialisation" << std::endl;
-    LOG.Flush();
     pcGround = GetSensor<CCI_PiPuckGroundColourSensor>("pipuck_ground_colour");
   }
 
