@@ -20,14 +20,17 @@ CTestController::CTestController() :
   }
 
   void CTestController::ControlStep() {
-    // pcActuator->SetLinearVelocity(0.1, 0.1); // 10 centimeter per second forwards
-    // std::vector<Real> vecReadings;
-    // pcGround->Visit([&vecReadings] (const CCI_PiPuckGroundColourSensor::SInterface& s_interface) {
-    //   vecReadings.emplace_back(s_interface.Reflected);
-    // });
-    // for(Real f_reading : vecReadings) {
-    //   std::cout << "Reading: " << f_reading << std::endl;
-    // }
+    pcActuator->SetLinearVelocity(0.1, 0.1); // 10 centimeter per second forwards
+    std::vector<Real> vecReadings;
+    pcGround->Visit([&vecReadings] (const CCI_PiPuckGroundColourSensor::SInterface& s_interface) {
+      vecReadings.emplace_back(s_interface.cColor.GetRed());
+      vecReadings.emplace_back(s_interface.cColor.GetGreen());
+      vecReadings.emplace_back(s_interface.cColor.GetBlue());
+
+      std::cout << "R: " << vecReadings[0] <<
+                  " G: " << vecReadings[1] <<
+                  " B: " << vecReadings[2] << std::endl;
+    });
   }
 
   /****************************************/
