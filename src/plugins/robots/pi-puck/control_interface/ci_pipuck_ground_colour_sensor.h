@@ -8,12 +8,13 @@
 #define CCI_PIPUCK_GROUND_COLOUR_SENSOR_H
 
 namespace argos {
-  //  class CCI_PiPuckGroundColourSensor;
+   class CCI_PiPuckGroundColourSensor;
 }
 
 #include <argos3/core/control_interface/ci_sensor.h>
 #include <argos3/core/utility/math/vector3.h>
 #include <argos3/core/utility/math/quaternion.h>
+#include <argos3/core/utility/datatypes/color.h>
 
 #include <map>
 #include <tuple>
@@ -32,13 +33,11 @@ namespace argos {
          SInterface(UInt8 un_label) :
             Label(un_label),
             Configuration(MAP_SENSOR_CONFIG.at(un_label)),
-            Reflected(0.0),
-            Background(0.0) {}
+            cColor(CColor::WHITE) {}
          /* members */
          const UInt8 Label;
          const TConfiguration& Configuration;
-         Real Reflected;
-         Real Background;
+         CColor cColor;
       };
 
    public:
