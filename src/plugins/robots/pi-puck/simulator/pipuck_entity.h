@@ -13,6 +13,7 @@ namespace argos {
    class CDirectionalLEDEquippedEntity;
    class CEmbodiedEntity;
    class CSimpleRadioEquippedEntity;
+   class CLightSensorEquippedEntity;
 }
 
 #include <argos3/core/simulator/entity/composable_entity.h>
@@ -32,6 +33,7 @@ namespace argos {
          m_pcControllableEntity(nullptr),
          m_pcEmbodiedEntity(nullptr),
          m_pcDifferentialDriveEntity(nullptr),
+         m_pcLightSensorEquippedEntity(nullptr),
          m_pcSimpleRadioEquippedEntity(nullptr) {}
 
       virtual ~CPiPuckEntity() {}
@@ -52,6 +54,10 @@ namespace argos {
 
       inline const CPiPuckDifferentialDriveEntity& GetDifferentialDriveEntity() const {
          return *m_pcDifferentialDriveEntity;
+      }
+
+      inline CLightSensorEquippedEntity& GetLightSensorEquippedEntity() {
+         return *m_pcLightSensorEquippedEntity;
       }
 
       inline CDirectionalLEDEquippedEntity& GetDirectionalLEDEquippedEntity() {
@@ -86,6 +92,7 @@ namespace argos {
       CDirectionalLEDEquippedEntity*  m_pcDirectionalLEDEquippedEntity;
       CEmbodiedEntity*                m_pcEmbodiedEntity;
       CPiPuckDifferentialDriveEntity* m_pcDifferentialDriveEntity;
+      CLightSensorEquippedEntity*     m_pcLightSensorEquippedEntity;
       CSimpleRadioEquippedEntity*     m_pcSimpleRadioEquippedEntity;
 
       static const CVector3 WIFI_OFFSET_POSITION;

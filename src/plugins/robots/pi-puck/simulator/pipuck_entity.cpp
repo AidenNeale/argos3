@@ -12,6 +12,7 @@
 #include <argos3/core/utility/datatypes/color.h>
 
 #include <argos3/plugins/simulator/entities/directional_led_equipped_entity.h>
+#include <argos3/plugins/simulator/entities/light_sensor_equipped_entity.h>
 #include <argos3/plugins/simulator/entities/simple_radio_equipped_entity.h>
 #include <argos3/plugins/simulator/media/directional_led_medium.h>
 #include <argos3/plugins/simulator/media/simple_radio_medium.h>
@@ -22,9 +23,15 @@ namespace argos {
 
    /****************************************/
    /****************************************/
+   static const Real BODY_RADIUS                = 0.035f;
 
    const CVector3 CPiPuckEntity::WIFI_OFFSET_POSITION = {0.0, 0.0, 0.05};
    const Real CPiPuckEntity::WIFI_TRANSMISSION_RANGE = 10.0;
+
+   static const Real PROXIMITY_SENSOR_RING_ELEVATION       = 0.06f;
+   static const Real PROXIMITY_SENSOR_RING_RADIUS          = BODY_RADIUS;
+   static const CRadians PROXIMITY_SENSOR_RING_START_ANGLE = CRadians((2 * ARGOS_PI / 8.0f) * 0.5f);
+   static const Real PROXIMITY_SENSOR_RING_RANGE           = 0.1f;
 
    /****************************************/
    /****************************************/
@@ -50,6 +57,18 @@ namespace argos {
                                        CVector3(0.0, 0.0255, 0.02125),
                                        CQuaternion(-CRadians::PI_OVER_TWO,
                                                    CVector3::X)).Enable();
+         /* Light sensor equipped entity */
+         m_pcLightSensorEquippedEntity =
+            new CLightSensorEquippedEntity(this,
+                                           "light_0");
+         AddComponent(*m_pcLightSensorEquippedEntity);
+         m_pcLightSensorEquippedEntity->AddSensorRing(
+            CVector3(0.0f, 0.0f, PROXIMITY_SENSOR_RING_ELEVATION),
+            PROXIMITY_SENSOR_RING_RADIUS,
+            PROXIMITY_SENSOR_RING_START_ANGLE,
+            PROXIMITY_SENSOR_RING_RANGE,
+            8,
+            m_pcEmbodiedEntity->GetOriginAnchor());
          /* create and initialize the differential drive entity */
          m_pcDifferentialDriveEntity
             = new CPiPuckDifferentialDriveEntity(this, "differential_drive_0");
@@ -80,7 +99,7 @@ namespace argos {
                                                   CColor::BLACK);
          m_pcDirectionalLEDEquippedEntity->AddLED("ring_led_1",
                                                   CVector3(0, 0, 0.025),
-                                                  CQuaternion(), 
+                                                  CQuaternion(),
                                                   sOriginAnchor,
                                                   CRadians::PI_OVER_THREE,
                                                   CColor::BLACK);
@@ -104,7 +123,7 @@ namespace argos {
                                                   CColor::BLACK);
          m_pcDirectionalLEDEquippedEntity->AddLED("ring_led_5",
                                                   CVector3(0, 0, 0.025),
-                                                  CQuaternion(), 
+                                                  CQuaternion(),
                                                   sOriginAnchor,
                                                   CRadians::PI_OVER_THREE,
                                                   CColor::BLACK);
